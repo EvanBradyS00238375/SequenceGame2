@@ -26,7 +26,6 @@ public class SequenceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sequence);
 
-        // Initialize UI elements
         blueButton = findViewById(R.id.blue);
         greenButton = findViewById(R.id.green);
         redButton = findViewById(R.id.red);
@@ -34,22 +33,17 @@ public class SequenceActivity extends AppCompatActivity {
         playGameButton = findViewById(R.id.playgame);
         directionTextView = findViewById(R.id.tvDirection);
 
-        // Set up button click listeners
         playGameButton.setOnClickListener(v -> startGame());
 
-        // Disable color buttons initially
         setColorButtonsEnabled(false);
     }
 
     private void startGame() {
-        // Reset game state
         sequenceToFollow.clear();
         currentIndex = 0;
 
-        // Generate initial sequence
         generateSequence(3);
 
-        // Show sequence to player
         showSequence();
     }
 
@@ -79,9 +73,8 @@ public class SequenceActivity extends AppCompatActivity {
                 resetButtonColors();
                 currentIndex++;
                 showNextColor();
-            }, 1000); // Delay of 1 second between highlights
+            }, 1000);
         } else {
-            // Sequence display complete; transition to GameActivity
             handler.postDelayed(() -> {
                 Intent intent = new Intent(SequenceActivity.this, GameActivity.class);
                 intent.putStringArrayListExtra("sequence", new ArrayList<>(sequenceToFollow));
